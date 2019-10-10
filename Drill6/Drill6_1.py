@@ -87,6 +87,7 @@ def draw_curve_4_points(p1, p2, p3, p4):
 
 prepare_turtle_canvas()
 
+
 while True:
     draw_curve_4_points((-300, 200), (400, 350), (300, -300), (-200, -200))
 turtle.done()
