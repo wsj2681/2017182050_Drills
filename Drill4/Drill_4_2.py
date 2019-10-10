@@ -48,6 +48,7 @@ dir_x = 0
 dir_y = 0
 arrow = 100
 
+
 while running:
     clear_canvas()
     kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
