@@ -41,6 +41,7 @@ x, y = KPU_WIDTH // 2, KPU_HEIGHT // 2
 cx, cy = KPU_WIDTH // 2, KPU_HEIGHT // 2
 click = False
 
+
 while Following:
     clear_canvas()
     kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
