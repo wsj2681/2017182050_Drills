@@ -98,6 +98,7 @@ print(move_location)
 while running:
     clear_canvas()
 
+    # list index init
     if idx + 1 == 499:
         idx = 0
 
