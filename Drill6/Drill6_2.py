@@ -22,69 +22,48 @@ def curve_moving(points):
     global flag
 
     # p0-p1
-    for i in range(0, 100, 2):
-        t = i / 100
-        mr = mathematics_type_b(t, points[9], points[0], points[1], points[2])
-        move_location.append(mr)
+    mathematics_type_b(points[9], points[0], points[1], points[2])
     # p1-p2
-    for i in range(0, 100, 2):
-        t = i / 100
-        mr = mathematics_type_b(t, points[0], points[1], points[2], points[3])
-        move_location.append(mr)
+    mathematics_type_b(points[0], points[1], points[2], points[3])
     # p2-p3
-    for i in range(0, 100, 2):
-        t = i / 100
-        mr = mathematics_type_b(t, points[1], points[2], points[3], points[4])
-        move_location.append(mr)
+    mathematics_type_b(points[1], points[2], points[3], points[4])
     # p3-p4
-    for i in range(0, 100, 2):
-        t = i / 100
-        mr = mathematics_type_b(t, points[2], points[3], points[4], points[5])
-        move_location.append(mr)
+    mathematics_type_b(points[2], points[3], points[4], points[5])
     # p4-p5
-    for i in range(0, 100, 2):
-        t = i / 100
-        mr = mathematics_type_b(t, points[3], points[4], points[5], points[6])
-        move_location.append(mr)
+    mathematics_type_b(points[3], points[4], points[5], points[6])
     # p5-p6
-    for i in range(0, 100, 2):
-        t = i / 100
-        mr = mathematics_type_b(t, points[4], points[5], points[6], points[7])
-        move_location.append(mr)
+    mathematics_type_b(points[4], points[5], points[6], points[7])
     # p6-p7
-    for i in range(0, 100, 2):
-        t = i / 100
-        mr = mathematics_type_b(t, points[5], points[6], points[7], points[8])
-        move_location.append(mr)
+    mathematics_type_b(points[5], points[6], points[7], points[8])
     # p7-p8
-    for i in range(0, 100, 2):
-        t = i / 100
-        mr = mathematics_type_b(t, points[6], points[7], points[8], points[9])
-        move_location.append(mr)
+    mathematics_type_b(points[6], points[7], points[8], points[9])
     # p8-p9
-    for i in range(0, 100, 2):
-        t = i / 100
-        mr = mathematics_type_b(t, points[7], points[8], points[9], points[0])
-        move_location.append(mr)
+    mathematics_type_b(points[7], points[8], points[9], points[0])
     #p8-p9
-    for i in range(0, 100, 2):
-        t = i / 100
-        mr = mathematics_type_b(t, points[8], points[9], points[0], points[1])
-        move_location.append(mr)
+    mathematics_type_b(points[8], points[9], points[0], points[1])
+
+
 
 
 def mathematics_type_a(t, a, b, c):
+    for i in range(0, 100, 2):
+        t = i / 100
     mx = (2 * t ** 2 - 3 * t + 1) * a[0] + (-4 * t ** 2 + 4 * t) * b[0] + (2 * t ** 2 - t) * c[0]
     my = (2 * t ** 2 - 3 * t + 1) * a[1] + (-4 * t ** 2 + 4 * t) * b[1] + (2 * t ** 2 - t) * c[1]
-    return mx, my
+    mr = mx, my
+    move_location.append(mr)
+    return
 
 
-def mathematics_type_b(t, a, b, c, d):
-    mx = ((-t ** 3 + 2 * t ** 2 - t) * a[0] + (3 * t ** 3 - 5 * t ** 2 + 2) * b[0] + (-3 * t ** 3 + 4 * t ** 2 + t) *
-          c[0] + (t ** 3 - t ** 2) * d[0]) / 2
-    my = ((-t ** 3 + 2 * t ** 2 - t) * a[1] + (3 * t ** 3 - 5 * t ** 2 + 2) * b[1] + (-3 * t ** 3 + 4 * t ** 2 + t) *
-          c[1] + (t ** 3 - t ** 2) * d[1]) / 2
-    return mx, my
+def mathematics_type_b(a, b, c, d):
+    for i in range(0, 100, 2):
+        t = i / 100
+        mx = ((-t ** 3 + 2 * t ** 2 - t) * a[0] + (3 * t ** 3 - 5 * t ** 2 + 2) * b[0] + (-3 * t ** 3 + 4 * t ** 2 + t) *
+            c[0] + (t ** 3 - t ** 2) * d[0]) / 2
+        my = ((-t ** 3 + 2 * t ** 2 - t) * a[1] + (3 * t ** 3 - 5 * t ** 2 + 2) * b[1] + (-3 * t ** 3 + 4 * t ** 2 + t) *
+            c[1] + (t ** 3 - t ** 2) * d[1]) / 2
+        mr = mx, my
+        move_location.append(mr)
 
 
 # random location
