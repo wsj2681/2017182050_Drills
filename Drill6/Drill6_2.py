@@ -22,27 +22,25 @@ def curve_moving(points):
     global flag
 
     # p0-p1
-    mathematics_type_b(points[9], points[0], points[1], points[2])
+    mathematics_type_b(points[9], points[0:2])
     # p1-p2
-    mathematics_type_b(points[0], points[1], points[2], points[3])
+    mathematics_type_b(points[0:3])
     # p2-p3
-    mathematics_type_b(points[1], points[2], points[3], points[4])
+    mathematics_type_b(points[1:4])
     # p3-p4
-    mathematics_type_b(points[2], points[3], points[4], points[5])
+    mathematics_type_b(points[2:5])
     # p4-p5
-    mathematics_type_b(points[3], points[4], points[5], points[6])
+    mathematics_type_b(points[3:6])
     # p5-p6
-    mathematics_type_b(points[4], points[5], points[6], points[7])
+    mathematics_type_b(points[4:7])
     # p6-p7
-    mathematics_type_b(points[5], points[6], points[7], points[8])
+    mathematics_type_b(points[5:8])
     # p7-p8
-    mathematics_type_b(points[6], points[7], points[8], points[9])
+    mathematics_type_b(points[6:9])
     # p8-p9
-    mathematics_type_b(points[7], points[8], points[9], points[0])
+    mathematics_type_b(points[7:9], points[0])
     #p8-p9
-    mathematics_type_b(points[8], points[9], points[0], points[1])
-
-
+    mathematics_type_b(points[8:9], points[0:1])
 
 
 def mathematics_type_a(t, a, b, c):
