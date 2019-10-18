@@ -26,3 +26,18 @@ def handle_events():
             running = False
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
+
+open_canvas()
+running = True
+grass = Grass()
+
+while running:
+    handle_events()
+
+    clear_canvas()
+    grass.draw()
+
+    update_canvas()
+    delay(0.05)
+
+close_canvas()
