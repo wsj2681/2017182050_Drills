@@ -23,9 +23,14 @@ class Grass:
 class Ball21:
     def __init__(self):
         self.x, self.y = random.randint(1, 799), 599
+        self.fy = random.randint(1, 30)
         self.image = load_image('ball21x21.png')
     def update(self):
-        self.y -= random.randint(1, 30)
+        if self.y > 50:
+            self.y -= self.fy
+        else:
+            self.y = self.y
+
     def draw(self):
         self.image.draw(self.x, self.y)
 
@@ -33,9 +38,14 @@ class Ball21:
 class Ball41:
     def __init__(self):
         self.x, self.y = random.randint(1, 799), 599
+        self.fy = y = random.randint(1, 30)
         self.image = load_image('ball41x41.png')
     def update(self):
-        self.y -= random.randint(1, 30)
+        if self.y > 50:
+            self.y -= self.fy
+        else:
+            self.y = self.y
+
     def draw(self):
         self.image.draw(self.x, self.y)
 
@@ -50,21 +60,36 @@ def handle_events():
             running = False
 
 open_canvas()
-running = True
-grass = Grass()
 
+# ball count max 20
+idx21 = random.randint(1, 20)
+idx41 = 20 - idx21
+running = True
+
+grass = Grass()
 team = [Boy() for i in range(11)]
+ball21 = [Ball21() for i in range(idx21)]
+ball41 = [Ball41() for i in range(idx41)]
 
 while running:
     handle_events()
     for boy in team:
         boy.update()
 
+    for ball in ball21:
+        ball.update()
+    for ball in ball41:
+        ball.update()
+
     clear_canvas()
     grass.draw()
 
     for boy in team:
         boy.draw()
+    for ball in ball21:
+        ball.draw()
+    for ball in ball41:
+        ball.draw()
 
     update_canvas()
     delay(0.05)
