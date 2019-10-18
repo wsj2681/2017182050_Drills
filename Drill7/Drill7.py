@@ -11,3 +11,9 @@ class Boy:
         self.x += 5
     def draw(self):
         self.image.clip_draw(self.frame*100, 0, 100, 100, self.x, self.y)
+
+class Grass:
+    def __init__(self):
+        self.image = load_image('grass')
+    def draw(self):
+        self.image.draw(400, 30)
