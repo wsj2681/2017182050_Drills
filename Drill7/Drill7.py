@@ -14,13 +14,13 @@ class Boy:
 
 class Grass:
     def __init__(self):
-        self.image = load_image('grass')
+        self.image = load_image('grass.png')
     def draw(self):
         self.image.draw(400, 30)
 
 def handle_events():
     global running
-    event = get_events()
+    events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
             running = False
@@ -31,12 +31,16 @@ open_canvas()
 running = True
 grass = Grass()
 
+team = [Boy() for i in range(11)]
+
 while running:
     handle_events()
-
+    for boy in team:
+        boy.update()
     clear_canvas()
     grass.draw()
-
+    for boy in team:
+        boy.draw()
     update_canvas()
     delay(0.05)
 
