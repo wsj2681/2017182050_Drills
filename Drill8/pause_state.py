@@ -18,8 +18,16 @@ def exit():
     del(image)
 
 
+def handle_events():
+    events = get_events()
+    for event in events:
+        if event.type == SDL_KEYDOWN and event.key == SDLK_p:
+            print('pop')
+            game_framework.pop_state()
+
+
 def update():
-    update_canvas()
+    pass
 
 
 def draw():
@@ -27,20 +35,15 @@ def draw():
 
     if flag is 1:
         image.draw(400, 300, 300, 300)
-        update()
-        delay(0.5)
+        update_canvas()
         flag = 0
     elif flag is 0:
         main_state.draw()
         enter()
-        delay(0.5)
         flag = 1
 
-    delay(0.01)
+    delay(0.5)
 
 
-def handle_events():
-    events = get_events()
-    for event in events:
-        if event.type == SDL_KEYDOWN and event.key == SDLK_p:
-            game_framework.pop_state()
+def pause(): pass
+def resume(): pass
