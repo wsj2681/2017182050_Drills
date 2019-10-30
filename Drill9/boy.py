@@ -12,8 +12,59 @@ key_event_table = {
 
 
 # Boy States
+class IdleState:
+    @staticmethod
+    def enter(boy, event):
+        pass
 
-# fill here
+    @staticmethod
+    def exit(boy, event):
+        pass
+
+    @staticmethod
+    def do(boy):
+        pass
+
+    @staticmethod
+    def draw(boy):
+        pass
+
+
+class RunState:
+    @staticmethod
+    def enter(boy, event):
+        pass
+
+    @staticmethod
+    def exit(boy, event):
+        pass
+
+    @staticmethod
+    def do(boy):
+        pass
+
+    @staticmethod
+    def draw(boy):
+        pass
+
+
+class DashState:
+    @staticmethod
+    def enter(boy, event):
+        pass
+
+    @staticmethod
+    def exit(boy, event):
+        pass
+
+    @staticmethod
+    def do(boy):
+        pass
+
+    @staticmethod
+    def draw(boy):
+        pass
+
 
 next_state_table = {
 # fill here
