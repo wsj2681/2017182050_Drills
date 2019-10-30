@@ -15,7 +15,15 @@ key_event_table = {
 class IdleState:
     @staticmethod
     def enter(boy, event):
-        pass
+        if event == RIGHT_DOWN:
+            boy.velocity += 1
+        elif event == LEFT_DOWN:
+            boy.velocity -= 1
+        elif event == RIGHT_UP:
+            boy.velocity -= 1
+        elif event == LEFT_UP:
+            boy.velocity += 1
+        boy.timer = 1000
 
     @staticmethod
     def exit(boy, event):
@@ -23,11 +31,15 @@ class IdleState:
 
     @staticmethod
     def do(boy):
-        pass
+        boy.frame = (boy.frame + 1) % 8
+        boy.timer -= 1
 
     @staticmethod
     def draw(boy):
-        pass
+        if boy.dir == 1:
+            boy.image.clip_draw(boy.frame * 100, 300, 100, 100, boy.x, boy.y)
+        else:
+            boy.image.clip_draw(boy.frame * 100, 200, 100, 100, boy.x, boy.y)
 
 
 class RunState:
@@ -67,7 +79,9 @@ class DashState:
 
 
 next_state_table = {
-# fill here
+    IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState},
+    RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState}
+
 }
 
 
@@ -76,6 +90,7 @@ class Boy:
     def __init__(self):
         self.x, self.y = 800 // 2, 90
         self.image = load_image('animation_sheet.png')
+        self.frame = 0
         self.dir = 1
         self.velocity = 0
         self.event_que = []
