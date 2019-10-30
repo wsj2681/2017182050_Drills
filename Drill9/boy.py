@@ -1,13 +1,15 @@
 from pico2d import *
 
 # Boy Event
-RIGHT_DOWN, RIGHT_UP, LEFT_DOWN, LEFT_UP = range(4)
+RIGHT_DOWN, RIGHT_UP, LEFT_DOWN, LEFT_UP, SLEEP_TIMER, SHIFT_DOWN, SHIFT_UP = range(4)
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
     (SDL_KEYDOWN, SDLK_LEFT): LEFT_DOWN,
     (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
-    (SDL_KEYUP, SDLK_LEFT): LEFT_UP
+    (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
+    (SDL_KEYDOWN, SDLK_LSHIFT): SHIFT_DOWN,
+    (SDL_KEYUP, SDLK_LSHIFT): SHIFT_UP,
 }
 
 
@@ -74,10 +76,10 @@ class RunState:
             boy.image.clip_draw(boy.frame * 100, 0, 100, 100, boy.x, boy.y)
 
 
-class DashState:
+class SleepState:
     @staticmethod
     def enter(boy, event):
-        pass
+        boy.frame = 0
 
     @staticmethod
     def exit(boy, event):
@@ -85,11 +87,42 @@ class DashState:
 
     @staticmethod
     def do(boy):
-        pass
+        boy.frame = (boy.frame + 1) % 8
 
     @staticmethod
     def draw(boy):
+        if boy.dir == 1:
+            boy.image.clip_composite_draw(boy.frame * 100, 300, 100, 100,
+                                          3.141592 / 2, '', boy.x - 25, boy.y - 25, 100, 100)
+        else:
+            boy.image.clip_composite_draw(boy.frame * 100, 200, 100, 100,
+                                          -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
+
+
+class DashState:
+    @staticmethod
+    def enter(boy, event):
+        boy.timer = 100
+
+    @staticmethod
+    def exit(boy, event):
         pass
+
+    @staticmethod
+    def do(boy):
+        boy.frame = (boy.frame + 1) % 8
+        boy.timer -= 1
+        boy.x += boy.velocity * 3
+        boy.x = clamp(25, boy.x, 800 - 25)
+        if boy.timer == 0:
+            boy.add_event(SHIFT_UP)
+
+    @staticmethod
+    def draw(boy):
+        if boy.velocity == 1:
+            boy.image.clip_draw(boy.frame * 100, 100, 100, 100, boy.x, boy.y)
+        else:
+            boy.image.clip_draw(boy.frame * 100, 0, 100, 100, boy.x, boy.y)
 
 
 next_state_table = {
