@@ -45,7 +45,15 @@ class IdleState:
 class RunState:
     @staticmethod
     def enter(boy, event):
-        pass
+        if event == RIGHT_DOWN:
+            boy.velocity += 1
+        elif event == LEFT_DOWN:
+            boy.velocity -= 1
+        elif event == RIGHT_UP:
+            boy.velocity -= 1
+        elif event == LEFT_UP:
+            boy.velocity += 1
+        boy.dir = boy.velocity
 
     @staticmethod
     def exit(boy, event):
@@ -53,11 +61,17 @@ class RunState:
 
     @staticmethod
     def do(boy):
-        pass
+        boy.frame = (boy.frame + 1) % 8
+        boy.timer -= 1
+        boy.x += boy.velocity
+        boy.x = clamp(25, boy.x, 800 - 25)
 
     @staticmethod
     def draw(boy):
-        pass
+        if boy.velocity == 1:
+            boy.image.clip_draw(boy.frame * 100, 100, 100, 100, boy.x, boy.y)
+        else:
+            boy.image.clip_draw(boy.frame * 100, 0, 100, 100, boy.x, boy.y)
 
 
 class DashState:
