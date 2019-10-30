@@ -35,6 +35,8 @@ class IdleState:
     def do(boy):
         boy.frame = (boy.frame + 1) % 8
         boy.timer -= 1
+        if boy.timer is 0:
+            boy.add_event(SLEEP_TIMER)
 
     @staticmethod
     def draw(boy):
@@ -133,7 +135,7 @@ next_state_table = {
                SHIFT_UP: RunState, SHIFT_DOWN: DashState},
     SleepState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState},
     DashState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, RIGHT_DOWN: IdleState, LEFT_DOWN: IdleState,
-                SHIFT_UP: DashState, SHIFT_DOWN: RunState}
+                SHIFT_UP: RunState, SHIFT_DOWN: RunState}
 }
 
 
