@@ -2,6 +2,7 @@ import sys
 import random
 from pico2d import *
 
+
 class Grass:
     def __init__(self):
         self.image = load_image('grass.png')
@@ -11,12 +12,14 @@ class Grass:
 
 
 class Boy:
+    image = None
 
     def __init__(self):
         self.x, self.y = random.randint(100, 700), 90
         self.frame = random.randint(0, 7)
-        self.image = load_image('run_animation.png')
-
+        # self.image = load_image('run_animation.png')
+        if Boy.image is None:
+            Boy.image = load_image('run_animation.png')
 
     def update(self):
         self.frame = (self.frame + 1) % 8
@@ -43,7 +46,8 @@ team = [Boy() for i in range(1000)]
 
 grass = Grass()
 
-running = True;
+running = True
+
 while running:
     handle_events()
 

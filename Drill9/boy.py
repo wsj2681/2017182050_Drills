@@ -1,7 +1,7 @@
 from pico2d import *
 
 # Boy Event
-# fill here
+RIGHT_DOWN, RIGHT_UP, LEFT_DOWN, LEFT_UP = range(4)
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
@@ -11,7 +11,6 @@ key_event_table = {
 }
 
 
-
 # Boy States
 
 # fill here
@@ -19,11 +18,6 @@ key_event_table = {
 next_state_table = {
 # fill here
 }
-
-
-
-
-
 
 
 class Boy:
@@ -36,26 +30,21 @@ class Boy:
         # fill here
         pass
 
-
     def change_state(self,  state):
         # fill here
         pass
-
 
     def add_event(self, event):
         # fill here
         pass
 
-
     def update(self):
         # fill here
         pass
 
-
     def draw(self):
         # fill here
         pass
-
 
     def handle_event(self, event):
         # fill here
