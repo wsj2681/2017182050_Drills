@@ -78,26 +78,33 @@ class Boy:
         self.image = load_image('animation_sheet.png')
         self.dir = 1
         self.velocity = 0
-        # fill here
-        pass
+        self.event_que = []
+        self.cur_state = IdleState
+        self.cur_state.enter(self, None)
 
     def change_state(self,  state):
-        # fill here
-        pass
+        if len(self.event_que) > 0:
+            event = self.event_que.pop()
+            self.cur_state.exit(self, event)
+            self.cur_state = next_state_table[self.cur_state][event]
+            self.cur_state.enter(self, event)
 
     def add_event(self, event):
-        # fill here
-        pass
+        self.event_que.insert(0, event)
 
     def update(self):
-        # fill here
-        pass
+        self.cur_state.do(self)
+        if len(self.event_que) > 0:
+            event = self.event_que.pop()
+            self.cur_state.exit(self, event)
+            self.cur_state = next_state_table[self.cur_state][event]
+            self.cur_state.enter(self, event)
 
     def draw(self):
-        # fill here
-        pass
+        self.cur_state.draw(self)
 
     def handle_event(self, event):
-        # fill here
-        pass
+        if (event.type, event.key) in key_event_table:
+            key_event = key_event_table[(event.type, event.key)]
+            self.add_event(key_event)
 
