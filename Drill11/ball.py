@@ -8,7 +8,7 @@ class Ball:
     image = None
 
     def __init__(self):
-        if Ball.image == None:
+        if Ball.image is None:
             Ball.image = load_image('ball21x21.png')
         self.x, self.y, self.fall_speed = random.randint(0, 1600 - 1), 60, 0
 
@@ -17,7 +17,7 @@ class Ball:
 
     def draw(self):
         self.image.draw(self.x, self.y)
-        # fill here for draw
+        draw_rectangle(*self.get_bb())
 
     def update(self):
         self.y -= self.fall_speed * game_framework.frame_time
