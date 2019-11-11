@@ -9,13 +9,14 @@ import game_world
 from boy import Boy
 from grass import Grass
 from ball import Ball, BigBall
-
+from brick import Brick
 name = "MainState"
 
 boy = None
 grass = None
 ball = None
 big_ball = None
+brick = None
 balls = []
 big_balls = []
 
@@ -42,6 +43,10 @@ def enter():
     global grass
     grass = Grass()
     game_world.add_object(grass, 0)
+
+    global brick
+    brick = Brick()
+    game_world.add_object(brick, 1)
 
     global ball, big_ball, balls, big_balls
     for i in range(10):
@@ -86,6 +91,13 @@ def update():
             ball.stop()
     for big_ball in big_balls:
         if collide(grass, big_ball):
+            big_ball.stop()
+
+    for ball in balls:
+        if collide(brick, ball):
+            ball.stop()
+    for big_ball in big_balls:
+        if collide(brick, big_ball):
             big_ball.stop()
 
 
