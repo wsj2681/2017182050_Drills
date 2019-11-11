@@ -16,6 +16,8 @@ boy = None
 grass = None
 ball = None
 big_ball = None
+balls = []
+big_balls = []
 
 
 def collide(a, b):
@@ -41,10 +43,12 @@ def enter():
     grass = Grass()
     game_world.add_object(grass, 0)
 
-    global ball, big_ball
+    global ball, big_ball, balls, big_balls
     for i in range(10):
         ball = Ball()
+        balls.append(ball)
         big_ball = BigBall()
+        big_balls.append(big_ball)
         game_world.add_object(ball, 1)
         game_world.add_object(big_ball, 1)
 
@@ -77,7 +81,12 @@ def update():
     for game_object in game_world.all_objects():
         game_object.update()
 
-    # fill here for collision check
+    for ball in balls:
+        if collide(grass, ball):
+            ball.stop()
+    for big_ball in big_balls:
+        if collide(grass, big_ball):
+            big_ball.stop()
 
 
 def draw():

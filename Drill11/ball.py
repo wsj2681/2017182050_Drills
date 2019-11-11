@@ -10,7 +10,7 @@ class Ball:
     def __init__(self):
         if Ball.image is None:
             Ball.image = load_image('ball21x21.png')
-        self.x, self.y, self.fall_speed = random.randint(0, 1600 - 1), 500, 10
+        self.x, self.y, self.fall_speed = random.randint(0, 1600 - 1), 500, random.randint(10, 50)
 
     def get_bb(self):
         return self.x - 10, self.y - 10, self.x + 10, self.y + 10
@@ -22,7 +22,8 @@ class Ball:
     def update(self):
         self.y -= self.fall_speed * game_framework.frame_time
 
-    # fill here for def stop
+    def stop(self):
+        self.fall_speed = 0
 
 
 class BigBall(Ball):
