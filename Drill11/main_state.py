@@ -8,14 +8,14 @@ import game_world
 
 from boy import Boy
 from grass import Grass
-from ball import Ball
+from ball import Ball, BigBall
 
 name = "MainState"
 
 boy = None
 grass = None
-balls = []
-big_balls = []
+ball = None
+big_ball = None
 
 
 def collide(a, b):
@@ -41,7 +41,13 @@ def enter():
     grass = Grass()
     game_world.add_object(grass, 0)
 
-    # fill here for balls
+    global ball, big_ball
+    for i in range(10):
+        ball = Ball()
+        big_ball = BigBall()
+        game_world.add_object(ball, 1)
+        game_world.add_object(big_ball, 1)
+
 
 
 def exit():
