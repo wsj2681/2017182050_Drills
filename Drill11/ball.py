@@ -2,6 +2,7 @@ import random
 from pico2d import *
 import game_world
 import game_framework
+from brick import Brick
 
 
 class Ball:
@@ -11,6 +12,7 @@ class Ball:
         if Ball.image is None:
             Ball.image = load_image('ball21x21.png')
         self.x, self.y, self.fall_speed = random.randint(0, 1600 - 1), 500, random.randint(10, 50)
+        self.follow_x_speed = Brick().speed
 
     def get_bb(self):
         return self.x - 10, self.y - 10, self.x + 10, self.y + 10
@@ -24,7 +26,6 @@ class Ball:
 
     def stop(self):
         self.fall_speed = 0
-
 
 class BigBall(Ball):
     MIN_FALL_SPEED = 50  # 50 pps = 1.5 meter per sec

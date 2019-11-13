@@ -10,28 +10,25 @@ from boy import Boy
 from grass import Grass
 from ball import Ball, BigBall
 from brick import Brick
+
 name = "MainState"
 
 boy = None
 grass = None
-ball = None
-big_ball = None
-brick = None
 balls = []
 big_balls = []
+brick = None
 
 
 def collide(a, b):
     left_a, bottom_a, right_a, top_a = a.get_bb()
     left_b, bottom_b, right_b, top_b = b.get_bb()
-    if left_a > right_b:
-        return False
-    if right_a < left_b:
-        return False
-    if top_a < bottom_b:
-        return False
-    if bottom_a > top_b:
-        return False
+
+    if left_a > right_b: return False
+    if right_a < left_b: return False
+    if top_a < bottom_b: return False
+    if bottom_a > top_b: return False
+
     return True
 
 
@@ -44,24 +41,16 @@ def enter():
     grass = Grass()
     game_world.add_object(grass, 0)
 
+    global balls
+    balls = [Ball() for i in range(10)] + [BigBall() for i in range(10)]
+    game_world.add_objects(balls, 1)
+
     global brick
     brick = Brick()
     game_world.add_object(brick, 1)
 
-    global ball, big_ball, balls, big_balls
-    for i in range(10):
-        ball = Ball()
-        balls.append(ball)
-        big_ball = BigBall()
-        big_balls.append(big_ball)
-        game_world.add_object(ball, 1)
-        game_world.add_object(big_ball, 1)
-
-
-
 def exit():
     game_world.clear()
-
 
 def pause():
     pass
@@ -77,7 +66,7 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            game_framework.quit()
+                game_framework.quit()
         else:
             boy.handle_event(event)
 
@@ -85,20 +74,26 @@ def handle_events():
 def update():
     for game_object in game_world.all_objects():
         game_object.update()
-
+    for ball in balls:
+        if collide(boy, ball):
+            balls.remove(ball)
+            game_world.remove_object(ball)
     for ball in balls:
         if collide(grass, ball):
             ball.stop()
-    for big_ball in big_balls:
-        if collide(grass, big_ball):
-            big_ball.stop()
-
-    for ball in balls:
         if collide(brick, ball):
-            ball.stop()
-    for big_ball in big_balls:
-        if collide(brick, big_ball):
-            big_ball.stop()
+            if brick.y + 20 < ball.y - 19:
+                ball.stop()
+            ball.x += brick.direction * brick.speed * game_framework.frame_time
+            ball.x = clamp(25, ball.x, 1600 - 25)
+    if collide(boy, brick):
+        if brick.y + 20 < boy.y - 15:
+            boy.fall_speed = 0
+        boy.x += brick.direction * brick.speed * game_framework.frame_time
+        boy.x = clamp(25, boy.x, 1600 - 25)
+    else:
+        boy.fall_speed = 800
+
 
 
 def draw():
@@ -106,3 +101,9 @@ def draw():
     for game_object in game_world.all_objects():
         game_object.draw()
     update_canvas()
+
+
+
+
+
+
