@@ -11,8 +11,8 @@ class Bird:
         self.image_go_left = load_image('bird_animation2.png')
         self.font = load_font('ENCR10B.TTF', 16)
         self.dir = 1
-        # velocity = 5km/h
-        self.velocity = 5
+        # velocity = 50km/h
+        self.velocity = 50
         self.frameX = 0
         self.frameY = 0
         self.frameTime = 0
@@ -20,18 +20,18 @@ class Bird:
 
     def update(self):
         if self.dir == 1:
-            self.x += game_framework.frame_time * 300;
+            self.x += self.velocity * game_framework.frame_time
             if self.x > 1500:
                 self.dir = -1
         elif self.dir == -1:
-            self.x -= game_framework.frame_time * 300;
+            self.x -= self.velocity * game_framework.frame_time
             if self.x < 100:
                 self.dir = 1
 
         self.frameTime += game_framework.frame_time
         if self.frameTime > 0.1:
             self.frameTime = 0
-            self.frameX += 1;
+            self.frameX += 1
 
         if self.frameX == 5:
             self.frameX = 0
