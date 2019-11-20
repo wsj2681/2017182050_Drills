@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b9461a9d-4b8e-47f4-9832-84129c2dfb9d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/boy.py" beforeDir="false" afterPath="$PROJECT_DIR$/boy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,7 +16,7 @@
   <component name="ProjectId" id="1Su9Zzipiof5tCTQUo8mEYMFJvR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="D:/2DGP_Project" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -98,7 +98,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
