@@ -74,6 +74,9 @@ def update():
         game_object.update()
         if collide(zombie, boy):
             game_framework.quit()
+        if collide(zombie, ball):
+            pass
+
 
 
 def draw():
