@@ -81,8 +81,6 @@ def handle_events():
 def update():
     for game_object in game_world.all_objects():
         game_object.update()
-        if collide(zombie, boy):
-            game_world.remove_object(boy)
 
     for ball in balls:
         if collide(boy, ball):
@@ -94,8 +92,9 @@ def update():
             zombie.zombie_hp += 100
             balls.remove(ball)
             game_world.remove_object(ball)
+
     if collide(boy, zombie):
-        if boy.hp >= zombie.zombie_hp:
+        if boy.hp > zombie.zombie_hp:
             game_world.remove_object(zombie)
         else:
             game_world.remove_object(boy)
