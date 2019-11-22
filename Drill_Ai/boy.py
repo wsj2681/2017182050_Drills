@@ -109,6 +109,7 @@ class Boy:
         self.image = load_image('animation_sheet.png')
         self.font = load_font('ENCR10B.TTF', 16)
         self.dir = 1
+        self.hp = 500
         self.x_velocity, self.y_velocity = 0, 0
         self.frame = 0
         self.event_que = []
@@ -116,9 +117,7 @@ class Boy:
         self.cur_state.enter(self, None)
 
     def get_bb(self):
-        # fill here
         return self.x - 50, self.y - 50, self.x + 50, self.y + 50
-
 
     def add_event(self, event):
         self.event_que.insert(0, event)
@@ -133,10 +132,8 @@ class Boy:
 
     def draw(self):
         self.cur_state.draw(self)
-        self.font.draw(self.x - 60, self.y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
-        #fill here
+        self.font.draw(self.x - 60, self.y + 50, '(HP: %3.2f)' % self.hp, (255, 255, 0))
         draw_rectangle(*self.get_bb())
-        #debug_print('Velocity :' + str(self.velocity) + '  Dir:' + str(self.dir) + ' Frame Time:' + str(game_framework.frame_time))
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:

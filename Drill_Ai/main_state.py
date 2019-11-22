@@ -9,13 +9,13 @@ import game_world
 from boy import Boy
 from ground import Ground
 from zombie import Zombie
-
+from ball import Ball
 
 name = "MainState"
 
 boy = None
 zombie = None
-
+balls = []
 
 def collide(a, b):
     # fill here
@@ -30,9 +30,12 @@ def collide(a, b):
     return True
 
 
-
 def get_boy():
     return boy
+
+
+def get_ball():
+    return balls
 
 
 def enter():
@@ -47,8 +50,14 @@ def enter():
     ground = Ground()
     game_world.add_object(ground, 0)
 
+    global balls
+    balls = [Ball() for i in range(20)]
+    game_world.add_objects(balls, 1)
+
+
 def exit():
     game_world.clear()
+
 
 def pause():
     pass
@@ -73,9 +82,13 @@ def update():
     for game_object in game_world.all_objects():
         game_object.update()
         if collide(zombie, boy):
-            game_framework.quit()
+            game_world.remove_object(boy)
+
+    for ball in balls:
         if collide(zombie, ball):
-            pass
+            zombie.hp += 100
+            balls.remove(ball)
+            game_world.remove_object(ball)
 
 
 
