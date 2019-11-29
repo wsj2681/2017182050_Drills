@@ -13,7 +13,7 @@ from boy import Boy
 from zombie import Zombie
 
 boy = None
-
+zombies = []
 name = "WorldBuildState"
 
 menu = None
@@ -25,6 +25,7 @@ def enter():
     hide_cursor()
     hide_lattice()
 
+    zombies.clear()
 
 def exit():
     global menu
@@ -42,6 +43,9 @@ def resume():
 def get_boy():
     return boy
 
+def get_zombies():
+    return zombies
+
 
 def create_new_world():
     global boy
@@ -53,6 +57,7 @@ def create_new_world():
 
     for data in zombie_data_list:
         zombie = Zombie(data['name'], data['x'], data['y'], data['size'])
+        zombies.append(zombie)
         game_world.add_object(zombie, 1)
 
 
@@ -61,7 +66,7 @@ def load_saved_world():
 
     game_world.load()
     for o in game_world.all_objects():
-        if isinstance(o, boy):
+        if isinstance(o, Boy):
             boy = o
             break
 

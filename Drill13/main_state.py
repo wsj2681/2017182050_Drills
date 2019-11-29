@@ -8,7 +8,7 @@ import game_framework
 import game_world
 
 import world_build_state
-
+import ranking_state
 name = "MainState"
 
 
@@ -24,13 +24,16 @@ def collide(a, b):
 
     return True
 
+
 boy = None
+zombies = []
+
 
 def enter():
     # game world is prepared already in world_build_state
-    global boy
+    global boy, zombies
     boy = world_build_state.get_boy()
-    pass
+    zombies = world_build_state.get_zombies()
 
 def exit():
     game_world.clear()
@@ -60,6 +63,10 @@ def update():
     for game_object in game_world.all_objects():
         game_object.update()
 
+    for zombie in zombies:
+        if collide(boy, zombie):
+            ranking_state.curr_data = boy.time
+            game_framework.change_state(ranking_state)
 
 def draw():
     clear_canvas()

@@ -15,8 +15,6 @@ TIME_PER_ACTION = 0.5
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 8
 
-
-
 # Boy Event
 RIGHTKEY_DOWN, LEFTKEY_DOWN, UPKEY_DOWN, DOWNKEY_DOWN, RIGHTKEY_UP, LEFTKEY_UP, UPKEY_UP, DOWNKEY_UP, SPACE = range(9)
 
@@ -57,12 +55,11 @@ class WalkingState:
         elif event == DOWNKEY_UP:
             boy.y_velocity += RUN_SPEED_PPS
 
-
-
     @staticmethod
     def exit(boy, event):
-        if event == SPACE:
-            boy.fire_ball()
+        # if event == SPACE:
+        #   boy.fire_ball()
+        pass
 
     @staticmethod
     def do(boy):
@@ -71,7 +68,7 @@ class WalkingState:
         boy.y += boy.y_velocity * game_framework.frame_time
         boy.x = clamp(25, boy.x, get_canvas_width() - 25)
         boy.y = clamp(25, boy.y, get_canvas_height() - 25)
-
+        boy.time += game_framework.frame_time
     @staticmethod
     def draw(boy):
         if boy.x_velocity > 0:
@@ -94,19 +91,22 @@ class WalkingState:
                 else:
                     boy.image.clip_draw(int(boy.frame) * 100, 200, 100, 100, boy.x, boy.y)
 
-#next_state_table = {
+
+# next_state_table = {
 #    IdleState: {RIGHTKEY_UP: RunState, LEFTKEY_UP: RunState, RIGHTKEY_DOWN: RunState, LEFTKEY_DOWN: RunState,
 #                UPKEY_UP: RunState, UPKEY_DOWN: RunState, DOWNKEY_UP: RunState, DOWNKEY_DOWN: RunState,
 #                SPACE: IdleState},
 #    RunState:  {RIGHTKEY_UP: IdleState, LEFTKEY_UP: IdleState, RIGHTKEY_DOWN: IdleState, LEFTKEY_DOWN: IdleState,
 #                UPKEY_UP: IdleState, UPKEY_DOWN: IdleState, DOWNKEY_UP: IdleState, DOWNKEY_DOWN: IdleState,
 #                SPACE: IdleState},
-#}
+# }
 
 next_state_table = {
-    WalkingState: {RIGHTKEY_UP: WalkingState, LEFTKEY_UP: WalkingState, RIGHTKEY_DOWN: WalkingState, LEFTKEY_DOWN: WalkingState,
-                UPKEY_UP: WalkingState, UPKEY_DOWN: WalkingState, DOWNKEY_UP: WalkingState, DOWNKEY_DOWN: WalkingState,
-                SPACE: WalkingState}
+    WalkingState: {RIGHTKEY_UP: WalkingState, LEFTKEY_UP: WalkingState, RIGHTKEY_DOWN: WalkingState,
+                   LEFTKEY_DOWN: WalkingState,
+                   UPKEY_UP: WalkingState, UPKEY_DOWN: WalkingState, DOWNKEY_UP: WalkingState,
+                   DOWNKEY_DOWN: WalkingState,
+                   SPACE: WalkingState}
 }
 
 
@@ -124,6 +124,7 @@ class Boy:
         self.dir = 1
         self.x_velocity, self.y_velocity = 0, 0
         self.frame = 0
+        self.time = 0.0
         self.event_que = []
         self.cur_state = WalkingState
         self.cur_state.enter(self, None)
@@ -141,11 +142,10 @@ class Boy:
         # fill here
         return self.x - 50, self.y - 50, self.x + 50, self.y + 50
 
-
     def fire_ball(self):
-        ball = Ball(self.x, self.y, self.dir * RUN_SPEED_PPS * 10)
-        game_world.add_object(ball, 1)
-
+        # ball = Ball(self.x, self.y, self.dir * RUN_SPEED_PPS * 10)
+        # game_world.add_object(ball, 1)
+        pass
 
     def add_event(self, event):
         self.event_que.insert(0, event)
@@ -166,4 +166,3 @@ class Boy:
         if (event.type, event.key) in key_event_table:
             key_event = key_event_table[(event.type, event.key)]
             self.add_event(key_event)
-
