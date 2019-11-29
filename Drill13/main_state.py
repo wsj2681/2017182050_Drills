@@ -68,6 +68,7 @@ def update():
             ranking_state.curr_data = boy.time
             game_framework.change_state(ranking_state)
 
+
 def draw():
     clear_canvas()
     for game_object in game_world.all_objects():
