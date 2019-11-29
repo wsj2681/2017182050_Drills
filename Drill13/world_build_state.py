@@ -59,7 +59,11 @@ def create_new_world():
 def load_saved_world():
     global boy
 
-    # fill here
+    game_world.load()
+    for o in game_world.all_objects():
+        if isinstance(o, boy):
+            boy = o
+            break
 
 
 def handle_events():
