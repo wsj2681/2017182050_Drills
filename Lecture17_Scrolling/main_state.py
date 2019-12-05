@@ -48,8 +48,10 @@ def enter():
     boy.set_background(background)
 
     global balls
-    balls=[Ball() for i in range(100)]
+    balls = [Ball() for i in range(100)]
     game_world.add_objects(balls, 1)
+    for ball in balls:
+        ball.set_center_object(boy)
 
 
 def exit():
@@ -82,6 +84,10 @@ def update():
             boy.eat_count += 1
             balls.remove(ball)
             game_world.remove_object(ball)
+
+    if boy.eat_count == 100:
+        game_framework.quit()
+
 
 def draw():
     clear_canvas()

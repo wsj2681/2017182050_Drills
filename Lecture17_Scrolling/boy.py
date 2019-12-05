@@ -1,6 +1,5 @@
 import game_framework
 from pico2d import *
-
 import game_world
 
 # Boy Run Speed
@@ -70,14 +69,15 @@ class WalkingState:
         boy.x += boy.x_velocity * game_framework.frame_time
         boy.y += boy.y_velocity * game_framework.frame_time
 
+        #boy.x = clamp(0, boy.x, boy.bg.w)
+        #boy.y = clamp(0, boy.y, boy.bg.h)
+
         boy.x = clamp(boy.canvas_width // 2, boy.x, boy.bg.w - boy.canvas_width // 2)
         boy.y = clamp(boy.canvas_height // 2, boy.y, boy.bg.h - boy.canvas_height // 2)
 
-
-
     @staticmethod
     def draw(boy):
-        cx, cy = boy.canvas_width//2, boy.canvas_height//2
+        cx, cy =  boy.canvas_width//2, boy.canvas_height//2
         if boy.x_velocity > 0:
             boy.image.clip_draw(int(boy.frame) * 100, 100, 100, 100, cx, cy)
             boy.dir = 1
@@ -123,7 +123,7 @@ class Boy:
         self.eat_count = 0
 
     def get_bb(self):
-        return self.x - 50, self.y - 50, self.x + 50, self.y + 50
+        return self.canvas_width/2 - 25, self.canvas_height/2 - 50, self.canvas_width/2 + 25, self.canvas_height/2 + 50
 
 
     def set_background(self, bg):
