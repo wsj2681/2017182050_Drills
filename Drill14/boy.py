@@ -122,7 +122,10 @@ class Boy:
         self.cur_state.enter(self, None)
 
     def get_bb(self):
-        return self.x - 50, self.y - 50, self.x + 50, self.y + 50
+        return self.canvas_width / 2 - 25, \
+               self.canvas_height / 2 - 50, \
+               self.canvas_width / 2 + 25, \
+               self.canvas_height / 2 + 50
 
     def set_background(self, bg):
         self.bg = bg
