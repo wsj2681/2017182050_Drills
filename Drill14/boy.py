@@ -117,6 +117,7 @@ class Boy:
         self.dir = 1
         self.x_velocity, self.y_velocity = 0, 0
         self.frame = 0
+        self.ball_count = 0
         self.event_que = []
         self.cur_state = WalkingState
         self.cur_state.enter(self, None)
@@ -145,7 +146,7 @@ class Boy:
 
     def draw(self):
         self.cur_state.draw(self)
-        self.font.draw(self.canvas_width // 2 - 60, self.canvas_height // 2 + 50, '(%5d, %5d)' % (self.x, self.y),
+        self.font.draw(self.canvas_width // 2 - 60, self.canvas_height // 2 + 50, '(%5d)' % self.ball_count,
                        (255, 255, 0))
 
     def handle_event(self, event):
