@@ -27,4 +27,4 @@ class Ball:
 
     def draw(self):
         self.image.draw(0-self.window_left + self.x, 0-self.window_bottom + self.y)
-        draw_rectangle(*self.get_bb())
+        # draw_rectangle(*self.get_bb())

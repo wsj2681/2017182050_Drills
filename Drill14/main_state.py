@@ -50,10 +50,13 @@ def enter():
     global balls
     balls = [Ball() for i in range(100)]
     game_world.add_objects(balls, 1)
+    for ball in balls:
+        ball.set_center_object(boy)
 
 
 def exit():
     game_world.clear()
+
 
 def pause():
     pass
@@ -69,7 +72,7 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-                game_framework.quit()
+            game_framework.quit()
         else:
             boy.handle_event(event)
 
@@ -87,14 +90,9 @@ def update():
     if boy.ball_count == 100:
         game_framework.quit()
 
+
 def draw():
     clear_canvas()
     for game_object in game_world.all_objects():
         game_object.draw()
     update_canvas()
-
-
-
-
-
-
